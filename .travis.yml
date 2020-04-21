@@ -8,6 +8,8 @@ services:
 before_script:
   - psql -c "CREATE USER admin WITH PASSWORD 'password';" -U postgres
   - psql -f schema.sql
+  - psql -c "SELECT NOW() as now" -U admin
+  - psql -c "insert into metrics (delta0) values (1) returning id" -U admin
 install:
   - npm i
 script:
