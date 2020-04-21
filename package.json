@@ -6,7 +6,7 @@
     "dev": "gulp dev --require babel-register --gulpfile gulpfile.js",
     "dev-server": "DEBUG=* nodemon dist/index.js",
     "prod": "gulp build --require babel-register --gulpfile gulpfile.js",
-    "test": "DEBUG=true node_modules/mocha/bin/_mocha --exit ./dist/tests/test",
+    "test": "DEBUG=true node_modules/mocha/bin/_mocha --exit --timeout 5000 ./dist/tests/test",
     "lint": "eslint --ext '.ts' .",
     "ts-test": "npx tsc --noEmit --extendedDiagnostics"
   },
@@ -54,7 +54,7 @@
     "nodemon": "^2.0.2",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.16",
-    "supertest": "^3.3.0",
+    "supertest": "^4.0.2",
     "typescript": "^3.8.3"
   }
 }
