@@ -21,8 +21,8 @@ describe('# Metrics', () => {
       .expect(res => chai.expect(res.body.error).is.equal('Endpoint not found'));
   });
 
-  it('should return empty array of metrics', async () => {
-    return await request.get(endpoints.metrics)
+  it('should return empty array of metrics', () => {
+    return request.get(endpoints.metrics)
       .send()
       .expect(200)
       .expect(res => chai.expect(res.body.success).is.equal(true))
