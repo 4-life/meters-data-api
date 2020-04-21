@@ -2,11 +2,11 @@ language: node_js
 node_js:
   - "stable"
 env:
-  - API_BASE='/api/v1/' DEBUG='debug' ENDPOINT='localhost' DB_NAME='metrics_db' PORT='5432' DB_USER='admin' PASSWORD='password'
+  - API_BASE='/api/v1/' DEBUG='debug' ENDPOINT='localhost' DB_NAME='metrics_db' PORT='5432' DB_USER='postgres' PASSWORD='password'
 services:
   - postgresql
 before_script:
-  - psql -c "CREATE USER admin WITH PASSWORD 'password';" -U postgres
+  - psql -c "ALTER USER postgres PASSWORD 'password';" -U postgres
   - psql -c "CREATE DATABASE metrics_db;" -U postgres
   - psql -c "\c metrics_db;" -U postgres
   - psql -c "CREATE TABLE IF NOT EXISTS metrics(
