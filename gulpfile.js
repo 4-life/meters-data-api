@@ -4,7 +4,7 @@ import ts from 'gulp-typescript';
 import log from 'fancy-log';
 
 const tsProject = ts.createProject('tsconfig.json');
-const buildTsProject = ts.createProject('tsconfig.json');
+const buildTsProject = ts.createProject('tsconfig-release.json');
 
 const clean = () => {
   return del([ './dist' ]);
