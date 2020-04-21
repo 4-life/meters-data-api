@@ -7,7 +7,8 @@ services:
   - postgresql
 before_script:
   - psql -c "CREATE USER admin WITH PASSWORD 'password';" -U postgres
-  - psql -c "CREATE DATABASE metrics_db; \c metrics_db;" -U postgres
+  - psql -c "CREATE DATABASE metrics_db;" -U postgres
+  - psql -c "\c metrics_db;" -U postgres
   - psql -c "CREATE TABLE IF NOT EXISTS metrics(
       id SERIAL PRIMARY KEY NOT NULL,
       delta0 INT NOT NULL,
