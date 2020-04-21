@@ -22,7 +22,7 @@ const options: IOptions<object> = {
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pgp = require('pg-promise')(DEBUG ? options : {});
 
-export const dbUrl = `postgres://${user}:${password}@${endpoint}:${port}/${dbName}`;
+const dbUrl = `postgres://${user}${password ? `:${password}` : ''}@${endpoint}:${port}/${dbName}`;
 
 LOG.db(dbUrl);
 

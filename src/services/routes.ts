@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction, Application } from 'express';
 
 import { MetricController } from '../controllers/metrics';
-import { dbUrl } from '../config/config';
 
 const LOG = {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -67,7 +66,7 @@ export class Routes {
       LOG.http(`Endpoint not found: ${req.originalUrl}`);
       LOG.http(req.headers);
       LOG.http(req.body);
-      res.status(404).json({ error: dbUrl });
+      res.status(404).json({ error: 'Endpoint not found' });
       next();
     });
   }
