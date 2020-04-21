@@ -1,3 +1,6 @@
+<a href="https://travis-ci.org/4-life/meters-data-api"><img src="https://travis-ci.org/4-life/meters-data-api.svg" alt="Build Status"></a>
+<a href="https://david-dm.org/4-life/meters-data-api"><img src="https://david-dm.org/4-life/meters-data-api.svg" alt="Dependency Status"></a>
+<a href="https://david-dm.org/4-life/meters-data-api/?type=dev"><img src="https://david-dm.org/4-life/meters-data-api/dev-status.svg" alt="devDependency Status"></a>
 
 # Steps to create a server
 

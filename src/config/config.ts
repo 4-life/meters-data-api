@@ -1,5 +1,5 @@
 require('dotenv').config();
-import {IEventContext, IOptions} from 'pg-promise';
+import { IEventContext, IOptions } from 'pg-promise';
 
 const LOG = {
   db: require('debug')('db')
