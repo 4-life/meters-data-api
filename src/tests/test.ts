@@ -25,7 +25,7 @@ describe('# Metrics', () => {
     return request.get(endpoints.metrics)
       .send()
       .expect(200)
-      .expect(res => chai.expect(res.success).is.equal(true))
+      .expect(res => chai.expect(res.body.success).is.equal(true))
       .expect(res => chai.expect(res.body.data).that.is.a('array'))
       .expect(res => chai.expect(res.body.data.length).is.equal(0));
   });
