@@ -59,7 +59,13 @@ export class MetricController {
   public getData = async (res: Response) => {
     const metrics: Metric[] = await this.metricService.getAllMetrics().catch(LOG.info);
 
-
-    res.status(200).send({ success: true, data: metrics });
+    if (metrics) {
+      res.status(200).send({ success: true, data: metrics });
+    } else {
+      res.status(500).send({
+        success: false,
+        message: 'Server Error'
+      });
+    }
   }
 }
