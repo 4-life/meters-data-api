@@ -1,0 +1,15 @@
+{
+  "include": [
+    "src/**/*.ts"
+  ],
+  "compilerOptions": {
+    "removeComments": true,
+    "target": "es6",
+    "module": "commonjs",
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "lib": [ "es2015" ]
+}

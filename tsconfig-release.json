@@ -1,0 +1,17 @@
+{
+  "include": [
+    "src/**/*.ts"
+  ],
+  "compilerOptions": {
+    "removeComments": true,
+    "target": "es6",
+    "module": "commonjs",
+    "noImplicitAny": true
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "src/tests/**"
+  ],
+  "lib": [ "es2015" ]
+}
