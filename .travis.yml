@@ -29,7 +29,6 @@ before_script:
       rssi INT NOT NULL,
       date TIMESTAMP WITH TIME ZONE NOT NULL
     );" -U postgres
-  - psql -c "insert into metrics (delta0) values (1) returning id" -U postgres
 install:
   - npm i
 script:
