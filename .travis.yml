@@ -7,9 +7,28 @@ services:
   - postgresql
 before_script:
   - psql -c "CREATE USER admin WITH PASSWORD 'password';" -U postgres
-  - psql -f schema.sql
-  - psql -c "SELECT NOW() as now" -U postgres
-  - psql -c "insert into metrics (delta0) values (1) returning id" -U postgres
+  - psql -c "CREATE DATABASE metrics_db; \c metrics_db;" -U postgres
+  - psql -c "CREATE TABLE IF NOT EXISTS metrics(
+      id SERIAL PRIMARY KEY NOT NULL,
+      delta0 INT NOT NULL,
+      delta1 INT NOT NULL,
+      good INT NOT NULL,
+      boot INT NOT NULL,
+      ch0 INT NOT NULL,
+      ch1 INT NOT NULL,
+      imp0 INT NOT NULL,
+      imp1 INT NOT NULL,
+      version INT NOT NULL,
+      voltage INT NOT NULL,
+      version_esp VARCHAR(255) NOT NULL,
+      key VARCHAR(255) NOT NULL,
+      resets INT NOT NULL,
+      voltage_low BOOLEAN NOT NULL,
+      voltage_diff INT NOT NULL,
+      rssi INT NOT NULL,
+      date TIMESTAMP WITH TIME ZONE NOT NULL
+    );" -U metrics_db
+  - psql -c "insert into metrics (delta0) values (1) returning id" -U metrics_db
 install:
   - npm i
 script:
