@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { SocketService } from '../services/socket';
 import { MetricService } from '../services/database/metrics';
-import { Metric } from '../model/metric';
+import { Metric, MetricEnum } from '../model/metric';
 
 const LOG = {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -19,40 +19,47 @@ export class MetricController {
     this.socketService = socketService;
   }
 
-  public addMetric = async (req: Request, res: Response) => {
-    LOG.http(req.body);
-    const sensorid = req.body.sensorid;
-    let start = req.body.start;
+  private checkFieldsExist(fileds: Array<keyof Metric>, obj): { 'key': string } | void {
+    for (const field of fileds) {
+      if (!(field in obj)) {
+        return { key: String(field) };
+      }
+    }
+  }
 
-    if (!sensorid) {
+  public addMetric = async (req: Request, res: Response) => {
+    const body: Metric = req.body;
+    const fileds: Array<keyof Metric> = Object.keys(MetricEnum) as MetricEnum[];
+    const errors = this.checkFieldsExist(fileds, body);
+
+    if (errors) {
       res.status(400).send({
         success: false,
-        message: 'ID is not valid'
+        message: `Metric is not valid. Field ${errors.key} is missing`
       });
 
       return false;
     }
 
-    if (!start) {
-      start = new Date().toUTCString();
-    }
-
-    // insert metric to DB
-    const newMetric: Metric = await this.metricService.addMetric({ sensorid }).catch(LOG.info);
+    // insert metric into DB
+    const newMetric: Metric = await this.metricService.addMetric(body).catch(LOG.info);
 
     if (!newMetric) {
       res.status(500).send({
         success: false,
-        message: 'Error adding metric'
+        message: 'Server Error'
       });
       return false;
     }
 
     this.socketService.sendUpdate(newMetric);
+    res.status(200).send({ success: true });
+  }
 
-    res.status(200).send({
-      success: true,
-      message: 'New metric has added'
-    });
+  public getData = async (res: Response) => {
+    const metrics: Metric[] = await this.metricService.getAllMetrics().catch(LOG.info);
+
+
+    res.status(200).send({ success: true, data: metrics });
   }
 }

@@ -25,7 +25,23 @@ export class Routes {
     /**
      * @api {get} /api/v1/metrics
      * @apiPermission public request
-     * @apiDescription Update metrics
+     * @apiDescription Get array of metrics
+     *
+     * @apiHeader none
+     *
+     * -> metricService.get
+     *    get array
+     *
+     * @apiResponse Success:
+     *    HTTP 200 OK
+     */
+    app.get(this.base + 'metrics', (_: Request, res: Response) => this.metricController.getData(res));
+
+
+    /**
+     * @api {post} /api/v1/metrics
+     * @apiPermission public request
+     * @apiDescription Add new metric
      *
      * @apiHeader none
      *
@@ -35,7 +51,7 @@ export class Routes {
      * @apiResponse Success:
      *    HTTP 200 OK
      */
-    app.get(this.base + 'metrics', (req: Request, res: Response) => this.metricController.addMetric(req, res));
+    app.post(this.base + 'metrics', (req: Request, res: Response) => this.metricController.addMetric(req, res));
 
     /**
      * 404 Status if no route matched by now
@@ -47,8 +63,9 @@ export class Routes {
      *    }
      */
     app.use((req: Request, res: Response, next: NextFunction) => {
-      LOG.http('Endpoint not found');
-      LOG.http(req);
+      LOG.http(`Endpoint not found: ${req.originalUrl}`);
+      LOG.http(req.headers);
+      LOG.http(req.body);
       res.status(404).json({ 'error': 'Endpoint not found' });
       next();
     });
