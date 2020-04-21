@@ -2,13 +2,7 @@ language: node_js
 node_js:
   - "stable"
 env:
-  - API_BASE='/api/v1/'
-  - DEBUG='debug'
-  - ENDPOINT='localhost'
-  - DB_NAME='metrics_db'
-  - PORT='5432'
-  - DB_USER='admin'
-  - PASSWORD='password'
+  - API_BASE='/api/v1/' DEBUG='debug' ENDPOINT='localhost' DB_NAME='metrics_db' PORT='5432' DB_USER='admin' PASSWORD='password'
 services:
   - postgresql
 before_script:
@@ -38,5 +32,5 @@ install:
   - npm i
 script:
   - npm run lint
-  - npm run prod
+  - npm run dev
   - npm run test
