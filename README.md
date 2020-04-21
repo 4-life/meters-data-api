@@ -4,6 +4,8 @@
 
 # Steps to create a server
 
+## Create .env file with environments
+
 ## Create DB
 
 > sudo -i -u postgres
