@@ -1,12 +1,12 @@
 {
-  "name": "dm-as-ecs",
+  "name": "meters-data-api",
   "version": "0.0.1",
   "scripts": {
     "start": "gulp watch --require babel-register --gulpfile gulpfile.js",
     "dev": "gulp dev --require babel-register --gulpfile gulpfile.js",
     "dev-server": "DEBUG=* nodemon dist/index.js",
     "prod": "gulp build --require babel-register --gulpfile gulpfile.js",
-    "test": "DEBUG=true node_modules/mocha/bin/_mocha --exit --timeout 600000 ./dist/tests/test",
+    "test": "DEBUG=true node_modules/mocha/bin/_mocha --exit ./dist/tests/test",
     "lint": "eslint --ext '.ts' .",
     "ts-test": "npx tsc --noEmit --extendedDiagnostics"
   },
@@ -45,7 +45,7 @@
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
     "debug": "^4.1.0",
-    "del": "^4.1.0",
+    "del": "^5.1.0",
     "eslint": "^6.8.0",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0-beta.2",
