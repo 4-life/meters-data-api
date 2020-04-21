@@ -1,8 +1,42 @@
 language: node_js
 node_js:
   - "stable"
+env:
+  - API_BASE='/api/v1/'
+  - DEBUG='debug'
+  - ENDPOINT='localhost'
+  - DB_NAME='metrics_db'
+  - PORT='5432'
+  - DB_USER='admin'
+  - PASSWORD='password'
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database metrics_db;' -U postgres
+  - psql -c "CREATE USER admin WITH PASSWORD 'password';" -U postgres
+  - psql -c 'CREATE TABLE IF NOT EXISTS metrics(
+      id SERIAL PRIMARY KEY NOT NULL,
+      delta0 INT NOT NULL,
+      delta1 INT NOT NULL,
+      good INT NOT NULL,
+      boot INT NOT NULL,
+      ch0 INT NOT NULL,
+      ch1 INT NOT NULL,
+      imp0 INT NOT NULL,
+      imp1 INT NOT NULL,
+      version INT NOT NULL,
+      voltage INT NOT NULL,
+      version_esp VARCHAR(255) NOT NULL,
+      key VARCHAR(255) NOT NULL,
+      resets INT NOT NULL,
+      voltage_low BOOLEAN NOT NULL,
+      voltage_diff INT NOT NULL,
+      rssi INT NOT NULL,
+      date TIMESTAMP WITH TIME ZONE NOT NULL,
+    ); ' -U postgres
 install:
   - npm i
 script:
   - npm run lint
   - npm run prod
+  - npm run test

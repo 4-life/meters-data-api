@@ -12,7 +12,7 @@ export const chai = require('chai');
 export const should = chai.should();
 
 export const endpoints = {
-  newMetric: process.env.API_BASE + 'metrics',
+  metrics: process.env.API_BASE + 'metrics',
   notFound1: 'not/found',
   notFound2: process.env.API_BASE + 'not/found'
 };

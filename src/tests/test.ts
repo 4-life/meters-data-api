@@ -21,12 +21,12 @@ describe('# Metrics', () => {
       .expect(res => chai.expect(res.body.error).is.equal('Endpoint not found'));
   });
 
-  it('should return new metric id', () => {
-    return request.post(endpoints.newMetric)
-      .send({ 'sensorid': '123' })
+  it('should return empty array of metrics', () => {
+    return request.post(endpoints.metrics)
+      .send()
       .expect(200)
-      .expect(res => chai.expect(res.body.id).that.is.a('number'))
-      .expect(res => chai.expect(res.body.success).to.be.true);
+      .expect(res => chai.expect(res.body.data).that.is.a('array'))
+      .expect(res => chai.expect(res.body.data.length).is.equal(0));
   });
 
 });
