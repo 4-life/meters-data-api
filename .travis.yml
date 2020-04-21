@@ -28,8 +28,8 @@ before_script:
       voltage_diff INT NOT NULL,
       rssi INT NOT NULL,
       date TIMESTAMP WITH TIME ZONE NOT NULL
-    );" -U metrics_db
-  - psql -c "insert into metrics (delta0) values (1) returning id" -U metrics_db
+    );" -U postgres
+  - psql -c "insert into metrics (delta0) values (1) returning id" -U postgres
 install:
   - npm i
 script:
