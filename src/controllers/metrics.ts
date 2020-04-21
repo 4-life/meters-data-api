@@ -19,7 +19,7 @@ export class MetricController {
     this.socketService = socketService;
   }
 
-  private checkFieldsExist(fileds: Array<keyof Metric>, obj): { 'key': string } | void {
+  private checkFieldsExist(fileds: Array<keyof Metric>, obj: Metric): { 'key': string } | void {
     for (const field of fileds) {
       if (!(field in obj)) {
         return { key: String(field) };

@@ -5,7 +5,7 @@
     "start": "gulp watch --require babel-register --gulpfile gulpfile.js",
     "dev": "gulp dev --require babel-register --gulpfile gulpfile.js",
     "dev-server": "DEBUG=* nodemon dist/index.js",
-    "build": "gulp build --require babel-register --gulpfile gulpfile.js",
+    "prod": "gulp build --require babel-register --gulpfile gulpfile.js",
     "test": "DEBUG=true node_modules/mocha/bin/_mocha --exit --timeout 600000 ./dist/tests/test",
     "lint": "eslint --ext '.ts' .",
     "ts-test": "npx tsc --noEmit --extendedDiagnostics"
