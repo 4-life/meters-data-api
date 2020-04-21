@@ -41,6 +41,8 @@ export class MetricController {
       return false;
     }
 
+    LOG.http(body);
+
     // insert metric into DB
     const newMetric: Metric = await this.metricService.addMetric(body).catch(LOG.info);
 

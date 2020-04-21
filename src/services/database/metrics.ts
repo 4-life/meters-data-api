@@ -31,6 +31,7 @@ export class MetricService {
           ${MetricEnum.delta0},
           ${MetricEnum.delta1},
           ${MetricEnum.good},
+          ${MetricEnum.boot},
           ${MetricEnum.ch0},
           ${MetricEnum.ch1},
           ${MetricEnum.imp0},
@@ -60,12 +61,14 @@ export class MetricService {
           $13,
           $14,
           $15,
-          $16
+          $16,
+          $17
         ) RETURNING *`,
       [
         data.metric.delta0,
         data.metric.delta1,
         data.metric.good,
+        data.metric.boot,
         data.metric.ch0,
         data.metric.ch1,
         data.metric.imp0,
