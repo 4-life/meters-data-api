@@ -20,15 +20,14 @@ export class MetricController {
   }
 
   public addMetric = async (req: Request, res: Response) => {
-    LOG.http(req);
+    LOG.http(req.body);
     const sensorid = req.body.sensorid;
-    const geo = req.body.geo;
     let start = req.body.start;
 
-    if (!sensorid || !geo) {
+    if (!sensorid) {
       res.status(400).send({
         success: false,
-        message: 'ID or geolocation is not valid'
+        message: 'ID is not valid'
       });
 
       return false;

@@ -46,8 +46,9 @@ export class Routes {
      *      "error": "Endpoint not found"
      *    }
      */
-    app.use((_: Request, res: Response, next: NextFunction) => {
+    app.use((req: Request, res: Response, next: NextFunction) => {
       LOG.http('Endpoint not found');
+      LOG.http(req);
       res.status(404).json({ 'error': 'Endpoint not found' });
       next();
     });

@@ -15,8 +15,6 @@ const LOG = {
   server: require('debug')('server')
 };
 
-LOG.server(`Start`);
-
 export class App {
   public static readonly SOCKET_PORT: number = 8080;
   public static readonly HTTP_PORT: number = 3005;
