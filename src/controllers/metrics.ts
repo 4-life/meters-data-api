@@ -60,7 +60,7 @@ export class MetricController {
     const metrics: Metric[] = await this.metricService.getAllMetrics().catch(LOG.info);
 
     if (metrics) {
-      res.status(200).send({ success: true, data: metrics });
+      res.status(200).json({ success: true, data: metrics });
     } else {
       res.status(500).send({
         success: false,

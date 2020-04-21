@@ -11,16 +11,14 @@ describe('# Metrics', () => {
     return request.get(endpoints.notFound1)
       .send()
       .expect(404)
-      .expect(res => chai.expect(res.body.error).is.equal('Endpoint not found'))
-      .expect(res => chai.expect(res.success).is.equal(false));
+      .expect(res => chai.expect(res.body.error).is.equal('Endpoint not found'));
   });
 
   it('should return not found api 2', () => {
     return request.get(endpoints.notFound2)
       .send()
       .expect(404)
-      .expect(res => chai.expect(res.body.error).is.equal('Endpoint not found'))
-      .expect(res => chai.expect(res.success).is.equal(false));
+      .expect(res => chai.expect(res.body.error).is.equal('Endpoint not found'));
   });
 
   it('should return empty array of metrics', () => {
@@ -39,8 +37,7 @@ describe('# Metrics', () => {
         ch1: 20
       })
       .expect(400)
-      .expect(res => chai.expect(res.body.message).is.equal('Metric is not valid. Field delta0 is missing'))
-      .expect(res => chai.expect(res.success).is.equal(false));
+      .expect(res => chai.expect(res.body.message).is.equal('Metric is not valid. Field delta0 is missing'));
   });
 
 });

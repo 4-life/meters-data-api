@@ -66,7 +66,7 @@ export class Routes {
       LOG.http(`Endpoint not found: ${req.originalUrl}`);
       LOG.http(req.headers);
       LOG.http(req.body);
-      res.status(404).json({ 'error': 'Endpoint not found' });
+      res.status(404).json({ error: 'Endpoint not found' });
       next();
     });
   }
