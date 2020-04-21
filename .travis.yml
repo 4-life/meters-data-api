@@ -12,9 +12,9 @@ env:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database metrics_db;' -U postgres
+  - psql -c "create database metrics_db;" -U postgres
   - psql -c "CREATE USER admin WITH PASSWORD 'password';" -U postgres
-  - psql -c 'CREATE TABLE IF NOT EXISTS metrics(
+  - psql -c "CREATE TABLE IF NOT EXISTS metrics(
       id SERIAL PRIMARY KEY NOT NULL,
       delta0 INT NOT NULL,
       delta1 INT NOT NULL,
@@ -32,8 +32,8 @@ before_script:
       voltage_low BOOLEAN NOT NULL,
       voltage_diff INT NOT NULL,
       rssi INT NOT NULL,
-      date TIMESTAMP WITH TIME ZONE NOT NULL,
-    ); ' -U postgres
+      date TIMESTAMP WITH TIME ZONE NOT NULL
+    );" -U postgres
 install:
   - npm i
 script:

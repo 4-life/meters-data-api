@@ -21,5 +21,5 @@ CREATE TABLE IF NOT EXISTS metrics(
     voltage_low BOOLEAN NOT NULL,
     voltage_diff INT NOT NULL,
     rssi INT NOT NULL,
-    date TIMESTAMP WITH TIME ZONE NOT NULL,
+    date TIMESTAMP WITH TIME ZONE NOT NULL
 );
