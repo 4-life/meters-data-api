@@ -22,7 +22,7 @@ describe('# Metrics', () => {
   });
 
   it('should return empty array of metrics', () => {
-    return request.post(endpoints.metrics)
+    return request.get(endpoints.metrics)
       .send()
       .expect(200)
       .expect(res => chai.expect(res.body.data).that.is.a('array'))

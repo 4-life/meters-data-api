@@ -13,6 +13,6 @@ export const should = chai.should();
 
 export const endpoints = {
   metrics: process.env.API_BASE + 'metrics',
-  notFound1: 'not/found',
+  notFound1: process.env.API_BASE,
   notFound2: process.env.API_BASE + 'not/found'
 };
