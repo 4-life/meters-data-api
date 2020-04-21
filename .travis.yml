@@ -5,6 +5,8 @@ env:
   - API_BASE='/api/v1/' DEBUG='debug' ENDPOINT='localhost' DB_NAME='travis_ci_test' PORT='5432' DB_USER='postgres'
 services:
   - postgresql
+addons:
+  postgresql: 10
 before_install:
   - sudo service postgresql stop
   - sed -e 's/^port.*/port = 5432/' /etc/postgresql/10/main/postgresql.conf > postgresql.conf
