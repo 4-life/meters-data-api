@@ -44,12 +44,13 @@ export class MetricController {
     LOG.http(body);
 
     // insert metric into DB
-    const newMetric: Metric = await this.metricService.addMetric(body).catch(LOG.info);
+    const newMetric = await this.metricService.addMetric(body);
 
     if (!newMetric) {
       res.status(500).send({
         success: false,
-        message: 'Server Error'
+        message: 'Server Error',
+        newMetric
       });
       return false;
     }
@@ -59,7 +60,7 @@ export class MetricController {
   }
 
   public getData = async (res: Response) => {
-    const metrics: Metric[] = await this.metricService.getAllMetrics().catch(LOG.info);
+    const metrics = await this.metricService.getAllMetrics();
 
     if (metrics) {
       res.status(200).json({ success: true, data: metrics });
