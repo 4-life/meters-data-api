@@ -12,13 +12,9 @@ export class MetricService {
   }
 
   public selectDbUser(): Promise<Metric[]> {
-    const select = db.one(
+    return db.one(
       `SELECT current_user`
-    ).catch(logs.dbError);
-
-    logs.warning(select, 'db');
-
-    return select;
+    ).then(data => logs.addBreadcrumbs(data, 'db')).catch(logs.dbError);
   }
 
   public selectDb(): Promise<Metric[]> {

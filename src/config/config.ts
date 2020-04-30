@@ -12,6 +12,14 @@ const DEBUG = !!process.env.DEBUG;
 const options: IOptions<object> = {
   query: (e: IEventContext) => {
     logs.addBreadcrumbs(e.query, 'db');
+  },
+  connect: (client) => {
+    const cp = client.connectionParameters;
+    logs.addBreadcrumbs(`Connected to database: ${cp.database}`, 'db');
+  },
+  disconnect(client) {
+    const cp = client.connectionParameters;
+    logs.addBreadcrumbs(`Disconnecting from database: ${cp.database}`, 'db');
   }
 };
 
@@ -20,7 +28,7 @@ const pgp = require('pg-promise')(DEBUG ? options : {});
 
 const dbUrl = `postgres://${user}${password ? `:${password}` : ''}@${endpoint}:${port}/${dbName}`;
 
-logs.addBreadcrumbs(dbUrl, 'db');
+logs.addBreadcrumbs(`${DEBUG}, ${dbUrl}`, 'db');
 
 const db = pgp(dbUrl);
 
