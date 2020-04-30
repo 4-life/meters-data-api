@@ -1,11 +1,7 @@
 import { Request, Response, NextFunction, Application } from 'express';
 
 import { MetricController } from '../controllers/metrics';
-
-const LOG = {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  http: require('debug')('http_service')
-};
+import { logs } from './logs';
 
 export class Routes {
   private base: string;
@@ -19,8 +15,7 @@ export class Routes {
   public listenHttp(app: Application, port: number, base: string): void {
     this.port = port;
     this.base = base;
-    app.listen(this.port, () => LOG.http(`App listening on port ${this.port}! 🚀`));
-
+    app.listen(this.port, () => logs.addBreadcrumbs(`App listening on port ${this.port}! 🚀`, 'http'));
 
     /**
      * @api {get} /api/v1/metrics
@@ -36,7 +31,6 @@ export class Routes {
      *    HTTP 200 OK
      */
     app.get(this.base + 'metrics', (_: Request, res: Response) => this.metricController.getData(res));
-
 
     /**
      * @api {post} /api/v1/metrics
@@ -63,9 +57,7 @@ export class Routes {
      *    }
      */
     app.use((req: Request, res: Response, next: NextFunction) => {
-      LOG.http(`Endpoint not found: ${req.originalUrl}`);
-      LOG.http(req.headers);
-      LOG.http(req.body);
+      logs.addBreadcrumbs(`Endpoint not found: ${req.originalUrl}`, 'http');
       res.status(404).json({ error: 'Endpoint not found' });
       next();
     });

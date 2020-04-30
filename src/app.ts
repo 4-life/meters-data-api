@@ -10,11 +10,7 @@ import { MetricController } from './controllers/metrics';
 import { Routes } from './services/routes';
 import { SocketService } from './services/socket';
 import { MetricService } from './services/database/metrics';
-
-const LOG = {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  server: require('debug')('server')
-};
+import { logs } from './services/logs';
 
 Sentry.init({
   dsn: 'https://8a807ecaeaba4498a33e86536652d7e1@o385989.ingest.sentry.io/5219657'
@@ -44,7 +40,7 @@ export class App {
     this.metricController = new MetricController(this.socketService, this.metricService);
 
     this.socketService.init(this.server);
-    this.server.listen(this.socketPort, () => LOG.server(`Running socket on port ${this.socketPort} 🚀`));
+    this.server.listen(this.socketPort, () => logs.addBreadcrumbs(`Running socket on port ${this.socketPort} 🚀`, 'server'));
 
     this.routesService = new Routes(this.metricController);
     this.routesService.listenHttp(this.app, this.httpPort, this.apiBase);

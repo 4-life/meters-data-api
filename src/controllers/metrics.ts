@@ -2,14 +2,7 @@ import { Request, Response } from 'express';
 import { SocketService } from '../services/socket';
 import { MetricService } from '../services/database/metrics';
 import { Metric, MetricEnum } from '../model/metric';
-import * as Sentry from '@sentry/node';
-
-const LOG = {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  http: require('debug')('http'),
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  info: require('debug')('metric_controller'),
-};
+import { logs } from '../services/logs';
 
 export class MetricController {
   private metricService: MetricService;
@@ -42,7 +35,7 @@ export class MetricController {
       return false;
     }
 
-    LOG.http(body);
+    logs.addBreadcrumbs(JSON.stringify(body), 'http');
 
     // insert metric into DB
     const newMetric = await this.metricService.addMetric(body);
@@ -62,12 +55,7 @@ export class MetricController {
 
   public getData = async (res: Response) => {
     const metrics = await this.metricService.getAllMetrics();
-
-    Sentry.addBreadcrumb({
-      category: 'DB',
-      message: JSON.stringify(metrics),
-      level: Sentry.Severity.Info
-    });
+    logs.addBreadcrumbs(JSON.stringify(metrics), 'db');
 
     if (metrics) {
       res.status(200).json({ success: true, data: metrics });

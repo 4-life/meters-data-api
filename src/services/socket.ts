@@ -5,11 +5,7 @@ import * as socketIo from 'socket.io';
 import { Message } from '../model/message';
 import { Action } from '../model/action';
 import { Metric } from '../model/metric';
-
-const LOG = {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  socket: require('debug')('socket_service')
-};
+import { logs } from './logs';
 
 export class SocketService {
   private io: SocketIO.Server;
@@ -31,7 +27,7 @@ export class SocketService {
         break;
 
       default:
-        LOG.socket('Unhandled action');
+        logs.addBreadcrumbs('Unhandled action', 'socket');
         break;
     }
   }
@@ -47,15 +43,15 @@ export class SocketService {
   }
 
   public connectSocket(socket: SocketIO.Socket) {
-    LOG.socket('Connected client on port %s.', this.port);
+    logs.addBreadcrumbs(`Connected client on port ${this.port}`, 'socket');
 
     socket.on('message', (message: Message) => {
-      LOG.socket('[server](message): %s', JSON.stringify(message));
+      logs.addBreadcrumbs(`[server](message): ${JSON.stringify(message)}`, 'socket');
       this.messages(message, socket.id);
     });
 
     socket.on('error', (err) => {
-      LOG.socket(err);
+      logs.error(err, 'socket');
     });
   }
 

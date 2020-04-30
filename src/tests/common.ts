@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 process.env.NODE_ENV = 'test';
 
 import 'mocha';
@@ -5,10 +6,8 @@ import 'mocha';
 import { app } from '../index';
 import { Metric } from '../model';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 export const request = require('supertest')(app);
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 export const chai = require('chai');
 export const should = chai.should();
 

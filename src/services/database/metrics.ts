@@ -1,11 +1,6 @@
 import db from '../../config/config';
 import { Metric, MetricEnum } from '../../model/metric';
-import * as Sentry from '@sentry/node';
-
-const LOG = {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  db: require('debug')('db')
-};
+import { logs } from '../logs';
 
 export class MetricService {
 
@@ -17,13 +12,10 @@ export class MetricService {
   }
 
   public getAllMetrics(): Promise<Metric[]> {
-    Sentry.captureMessage('getAllMetrics');
+    logs.info('Getting all metrics');
     return db.any(
       `SELECT * from metrics ORDER BY date ASC`
-    ).catch(error => {
-      LOG.db(error);
-      Sentry.captureException(error);
-    });
+    ).catch(logs.dbError);
   }
 
   private create(data: { metric: Metric; date: Date }): Promise<Metric> {
@@ -84,7 +76,7 @@ export class MetricService {
         data.metric.rssi,
         data.date
       ]
-    ).catch(LOG.db);
+    ).catch(logs.dbError);
   }
 
 }
