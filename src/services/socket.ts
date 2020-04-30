@@ -5,7 +5,7 @@ import * as socketIo from 'socket.io';
 import { Message } from '../model/message';
 import { Action } from '../model/action';
 import { Metric } from '../model/metric';
-import { logs } from './logs';
+import logs from './logs';
 
 export class SocketService {
   private io: SocketIO.Server;

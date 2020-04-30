@@ -40,10 +40,12 @@ function dbError(message: string): void {
   error(message, 'db');
 }
 
-export const logs = {
+const logs = {
   info,
   error,
   warning,
   addBreadcrumbs,
   dbError
 };
+
+export default logs;

@@ -1,6 +1,6 @@
 import db from '../../config/config';
 import { Metric, MetricEnum } from '../../model/metric';
-import { logs } from '../logs';
+import logs from '../logs';
 
 export class MetricService {
 
@@ -11,8 +11,20 @@ export class MetricService {
     });
   }
 
+  public selectDbUser(): Promise<Metric[]> {
+    return db.any(
+      `SELECT current_user`
+    ).catch(logs.dbError);
+  }
+
+  public selectDb(): Promise<Metric[]> {
+    return db.any(
+      `SELECT current_database()`
+    ).catch(logs.dbError);
+  }
+
   public getAllMetrics(): Promise<Metric[]> {
-    logs.info('Getting all metrics');
+    logs.warning('Getting all metrics', 'db');
     return db.any(
       `SELECT * from metrics ORDER BY date ASC`
     ).catch(logs.dbError);

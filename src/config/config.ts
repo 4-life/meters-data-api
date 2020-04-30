@@ -1,6 +1,6 @@
 require('dotenv').config();
 import { IEventContext, IOptions } from 'pg-promise';
-import { logs } from '../services/logs';
+import logs from '../services/logs';
 
 const endpoint: string = process.env.ENDPOINT || '';
 const user: string = process.env.DB_USER || '';

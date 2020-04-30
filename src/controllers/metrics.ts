@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { SocketService } from '../services/socket';
 import { MetricService } from '../services/database/metrics';
 import { Metric, MetricEnum } from '../model/metric';
-import { logs } from '../services/logs';
+import logs from '../services/logs';
 
 export class MetricController {
   private metricService: MetricService;
@@ -54,6 +54,14 @@ export class MetricController {
   }
 
   public getData = async (res: Response) => {
+    const test = this.tests();
+
+    logs.warning(JSON.stringify(test), 'db');
+
+    const test2 = await this.tests();
+
+    logs.warning(JSON.stringify(test2), 'db');
+
     const metrics = await this.metricService.getAllMetrics();
     logs.addBreadcrumbs(JSON.stringify(metrics), 'db');
 
@@ -65,5 +73,12 @@ export class MetricController {
         message: 'Server Error'
       });
     }
+  }
+
+  public tests = async () => {
+    const user = await this.metricService.selectDbUser();
+    const db = await this.metricService.selectDb();
+
+    return { user, db };
   }
 }

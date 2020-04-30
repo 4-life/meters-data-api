@@ -10,7 +10,7 @@ import { MetricController } from './controllers/metrics';
 import { Routes } from './services/routes';
 import { SocketService } from './services/socket';
 import { MetricService } from './services/database/metrics';
-import { logs } from './services/logs';
+import logs from './services/logs';
 
 Sentry.init({
   dsn: 'https://8a807ecaeaba4498a33e86536652d7e1@o385989.ingest.sentry.io/5219657'

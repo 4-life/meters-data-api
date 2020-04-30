@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, Application } from 'express';
 
 import { MetricController } from '../controllers/metrics';
-import { logs } from './logs';
+import logs from './logs';
 
 export class Routes {
   private base: string;
