@@ -55,7 +55,6 @@ export class MetricController {
 
   public getData = async (res: Response) => {
     const metrics = await this.metricService.getAllMetrics();
-    logs.addBreadcrumbs(JSON.stringify(metrics), 'db');
 
     if (metrics) {
       res.status(200).json({ success: true, data: metrics });

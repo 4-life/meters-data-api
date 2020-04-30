@@ -1,5 +1,5 @@
 require('dotenv').config();
-import { IEventContext, IInitOptions } from 'pg-promise';
+import { IEventContext, IInitOptions, IBaseProtocol, IMain } from 'pg-promise';
 import logs from '../services/logs';
 
 const endpoint: string = process.env.ENDPOINT || '';
@@ -26,9 +26,9 @@ const options: IInitOptions<object> = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pgp = require('pg-promise')(DEBUG ? options : {});
+const pgp: IMain<{}> = require('pg-promise')(DEBUG ? options : {});
 
 
-const db = pgp(dbUrl);
+const db: IBaseProtocol<{}> = pgp(dbUrl);
 
 export default db;

@@ -47,15 +47,14 @@ describe('# Metrics', () => {
       .expect(res => chai.expect(res.body.success).is.equal(true));
   });
 
-  it('should return one metric', () => {
+  it('should return only one metric', () => {
     return request.get(endpoints.metrics)
       .send()
       .expect(200)
       .expect(res => chai.expect(res.body.success).is.equal(true))
       .expect(res => chai.expect(res.body.data).that.is.a('array'))
       .expect(res => chai.expect(res.body.data.length).is.equal(1))
-      .expect(res => chai.expect(res.body.data.ch0).is.equal(newMetric.ch0))
-      .expect(res => chai.expect(res.body.data.ch1).is.equal(newMetric.ch1));
+      .expect(res => Object.keys(newMetric).forEach(key => chai.expect(res.body.data[0][key]).is.equal(newMetric[key])));
   });
 
 });

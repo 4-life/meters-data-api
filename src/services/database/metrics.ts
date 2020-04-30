@@ -4,21 +4,21 @@ import logs from '../logs';
 
 export class MetricService {
 
-  public async addMetric(metric: Metric): Promise<Metric> {
+  public async addMetric(metric: Metric): Promise<void | Metric> {
     return await this.create({
       metric,
       date: new Date
     });
   }
 
-  public getAllMetrics(): Promise<Metric[]> {
-    return db.any(
+  public getAllMetrics(): Promise<void | Metric[]> {
+    return db.any<Metric>(
       `SELECT * from metrics ORDER BY date ASC`
     ).catch(logs.dbError);
   }
 
-  private create(data: { metric: Metric; date: Date }): Promise<Metric> {
-    return db.one(
+  private create(data: { metric: Metric; date: Date }): Promise<void | Metric> {
+    return db.one<Metric>(
       `INSERT INTO metrics (
           ${MetricEnum.delta0},
           ${MetricEnum.delta1},
