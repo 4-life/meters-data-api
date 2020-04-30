@@ -11,18 +11,6 @@ export class MetricService {
     });
   }
 
-  public selectDbUser(): Promise<Metric[]> {
-    return db.one(
-      `SELECT current_user`
-    ).catch(logs.dbError);
-  }
-
-  public selectDb(): Promise<Metric[]> {
-    return db.one(
-      `SELECT current_database()`
-    ).catch(logs.dbError);
-  }
-
   public getAllMetrics(): Promise<Metric[]> {
     return db.any(
       `SELECT * from metrics ORDER BY date ASC`

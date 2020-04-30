@@ -54,10 +54,6 @@ export class MetricController {
   }
 
   public getData = async (res: Response) => {
-    const test2 = await this.tests();
-
-    logs.warning(JSON.stringify(test2), 'db');
-
     const metrics = await this.metricService.getAllMetrics();
     logs.addBreadcrumbs(JSON.stringify(metrics), 'db');
 
@@ -69,12 +65,5 @@ export class MetricController {
         message: 'Server Error'
       });
     }
-  }
-
-  public tests = async () => {
-    const user = await this.metricService.selectDbUser();
-    const db = await this.metricService.selectDb();
-
-    return { user, db };
   }
 }
