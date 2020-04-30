@@ -14,17 +14,16 @@ export class MetricService {
   public selectDbUser(): Promise<Metric[]> {
     return db.one(
       `SELECT current_user`
-    ).then(data => logs.addBreadcrumbs(data, 'db')).catch(logs.dbError);
+    ).catch(logs.dbError);
   }
 
   public selectDb(): Promise<Metric[]> {
-    return db.any(
+    return db.one(
       `SELECT current_database()`
     ).catch(logs.dbError);
   }
 
   public getAllMetrics(): Promise<Metric[]> {
-    logs.warning('Getting all metrics', 'db');
     return db.any(
       `SELECT * from metrics ORDER BY date ASC`
     ).catch(logs.dbError);
