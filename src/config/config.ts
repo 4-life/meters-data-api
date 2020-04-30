@@ -1,5 +1,5 @@
 require('dotenv').config();
-import { IEventContext, IOptions } from 'pg-promise';
+import { IEventContext, IInitOptions } from 'pg-promise';
 import logs from '../services/logs';
 
 const endpoint: string = process.env.ENDPOINT || '';
@@ -9,7 +9,7 @@ const port: string = process.env.PORT || '';
 const dbName: string = process.env.DB_NAME || '';
 const DEBUG = !!process.env.DEBUG;
 
-const options: IOptions<object> = {
+const options: IInitOptions<object> = {
   query: (e: IEventContext) => {
     logs.addBreadcrumbs(e.query, 'db');
   },
