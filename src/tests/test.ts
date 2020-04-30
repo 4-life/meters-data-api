@@ -44,7 +44,7 @@ describe('# Metrics', () => {
     return request.post(endpoints.metrics)
       .send(newMetric)
       .expect(200)
-      .expect(res => chai.expect(res.success).is.equal(true));
+      .expect(res => chai.expect(res.body.success).is.equal(true));
   });
 
   it('should return one metric', () => {

@@ -20,7 +20,7 @@ class DB {
   }
 
   public create(): Promise<string> {
-    return db.one(
+    return db.none(
       `CREATE TABLE IF NOT EXISTS metrics(
         id SERIAL PRIMARY KEY NOT NULL,
         delta0 INT NOT NULL,
