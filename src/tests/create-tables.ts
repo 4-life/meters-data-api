@@ -31,7 +31,7 @@ class DB {
         ch1 DOUBLE PRECISION NOT NULL,
         imp0 INT NOT NULL,
         imp1 INT NOT NULL,
-        version INT NOT NULL,
+        version DOUBLE PRECISION NOT NULL,
         voltage DOUBLE PRECISION NOT NULL,
         version_esp VARCHAR(255) NOT NULL,
         key VARCHAR(255) NOT NULL,
