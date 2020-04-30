@@ -54,10 +54,6 @@ export class MetricController {
   }
 
   public getData = async (res: Response) => {
-    const test = this.tests();
-
-    logs.warning(JSON.stringify(test), 'db');
-
     const test2 = await this.tests();
 
     logs.warning(JSON.stringify(test2), 'db');
