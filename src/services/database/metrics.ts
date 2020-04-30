@@ -1,5 +1,6 @@
 import db from '../../config/config';
 import { Metric, MetricEnum } from '../../model/metric';
+import * as Sentry from '@sentry/node';
 
 const LOG = {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -8,21 +9,21 @@ const LOG = {
 
 export class MetricService {
 
-  public addMetric(metric: Metric): Promise<Metric> {
-    return this.create({
+  public async addMetric(metric: Metric): Promise<Metric> {
+    return await this.create({
       metric,
       date: new Date
     });
   }
 
   public getAllMetrics(): Promise<Metric[]> {
-    return this.getAll();
-  }
-
-  private getAll(): Promise<Metric[]> {
+    Sentry.captureMessage('getAllMetrics');
     return db.any(
       `SELECT * from metrics ORDER BY date ASC`
-    ).catch(LOG.db);
+    ).catch(error => {
+      LOG.db(error);
+      Sentry.captureException(error);
+    });
   }
 
   private create(data: { metric: Metric; date: Date }): Promise<Metric> {

@@ -1,4 +1,5 @@
 require('dotenv').config();
+import * as Sentry from '@sentry/node';
 import { createServer, Server } from 'http';
 import * as express from 'express';
 import * as cors from 'cors';
@@ -14,6 +15,10 @@ const LOG = {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   server: require('debug')('server')
 };
+
+Sentry.init({
+  dsn: 'https://8a807ecaeaba4498a33e86536652d7e1@o385989.ingest.sentry.io/5219657'
+});
 
 export class App {
   public static readonly SOCKET_PORT: number = 8080;
@@ -38,7 +43,7 @@ export class App {
 
     this.metricController = new MetricController(this.socketService, this.metricService);
 
-    this.socketService.init(this.server,);
+    this.socketService.init(this.server);
     this.server.listen(this.socketPort, () => LOG.server(`Running socket on port ${this.socketPort} 🚀`));
 
     this.routesService = new Routes(this.metricController);
