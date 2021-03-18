@@ -1,10 +1,10 @@
 import db from '../../config/config';
-import { Metric, MetricEnum } from '../../model/metric';
+import { Metric, MetricEnum, MetricData } from '../../model/metric';
 import logs from '../logs';
 
 export class MetricService {
 
-  public async addMetric(metric: Metric): Promise<void | Metric> {
+  public async addMetric(metric: Metric): Promise<void | MetricData> {
     return await this.create({
       metric,
       date: new Date
@@ -12,13 +12,13 @@ export class MetricService {
   }
 
   public getAllMetrics(): Promise<void | Metric[]> {
-    return db.any<Metric>(
+    return db.any<MetricData>(
       `SELECT * from metrics ORDER BY date ASC`
     ).catch(logs.dbError);
   }
 
-  private create(data: { metric: Metric; date: Date }): Promise<void | Metric> {
-    return db.one<Metric>(
+  private create(data: { metric: Metric; date: Date }): Promise<void | MetricData> {
+    return db.one<MetricData>(
       `INSERT INTO metrics (
           ${MetricEnum.delta0},
           ${MetricEnum.delta1},

@@ -26,6 +26,8 @@ export class MetricController {
     const fileds: Array<keyof Metric> = Object.keys(MetricEnum) as MetricEnum[];
     const errors = this.checkFieldsExist(fileds, body);
 
+    logs.addBreadcrumbs(JSON.stringify(body), 'http');
+
     if (errors) {
       res.status(400).send({
         success: false,
@@ -34,8 +36,6 @@ export class MetricController {
 
       return false;
     }
-
-    logs.addBreadcrumbs(JSON.stringify(body), 'http');
 
     // insert metric into DB
     const newMetric = await this.metricService.addMetric(body);

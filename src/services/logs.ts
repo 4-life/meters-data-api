@@ -1,14 +1,17 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import * as Sentry from '@sentry/node';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug');
 
 const DEBUG = !!process.env.DEBUG;
 
 const LOG = {
-  db: require('debug')('db'),
-  http: require('debug')('http'),
-  server: require('debug')('server'),
-  socket: require('debug')('socket'),
+  db: debug('db'),
+  http: debug('http'),
+  server: debug('server'),
+  socket: debug('socket'),
 };
+
+debug.log = console.info.bind(console);
 
 function info(text: string): void {
   if (DEBUG) {

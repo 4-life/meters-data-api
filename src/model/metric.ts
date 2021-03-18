@@ -35,3 +35,7 @@ export interface Metric {
   readonly [MetricEnum.voltage_diff]: number;
   readonly [MetricEnum.rssi]: number;
 }
+
+export interface MetricData extends Metric {
+  readonly date: Date;
+}
