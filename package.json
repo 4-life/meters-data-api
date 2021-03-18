@@ -8,7 +8,8 @@
     "prod": "gulp build --require babel-register --gulpfile gulpfile.js",
     "test": "node ./dist/tests/create-tables && DEBUG=true node_modules/mocha/bin/_mocha --exit ./dist/tests/test",
     "lint": "eslint --ext '.ts' .",
-    "ts-test": "npx tsc --noEmit --extendedDiagnostics"
+    "ts-test": "npx tsc --noEmit --extendedDiagnostics",
+    "pm2": "DEBUG='*' pm2 start dist/index.js"
   },
   "babel": {
     "presets": [
