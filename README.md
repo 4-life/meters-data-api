@@ -1,8 +1,7 @@
 [![Build Status](https://travis-ci.org/4-life/meters-data-api.svg?branch=master)](https://travis-ci.org/4-life/meters-data-api)
-[![dependencies Status](https://david-dm.org/4-life/meters-data-api/status.svg)](https://david-dm.org/4-life/meters-data-api)
-[![devDependencies Status](https://david-dm.org/4-life/meters-data-api/dev-status.svg)](https://david-dm.org/4-life/meters-data-api?type=dev)
+![David](https://img.shields.io/david/4-life/meters-data-api)
+![David](https://img.shields.io/david/dev/4-life/meters-data-api)
 [![glutenfree](https://img.shields.io/badge/Gluten-Free-green.svg)](https://github.com/4-life/meters-data-api)
-
 # Steps to create a server
 
 ## Create .env file with environments
